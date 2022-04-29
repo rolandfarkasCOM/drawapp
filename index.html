@@ -1,0 +1,174 @@
+
+
+
+<html>
+<head>
+<title>Draw APP</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+
+
+</head>
+
+<body>
+    <div>
+   
+        <div  class="box">
+            <canvas id="c"></canvas>
+        </div>
+        <br><br><br>
+        <b>> Tools</b>
+        <div style="margin-top: 10px">
+        <span class="mdi mdi-format-text"> <button  title="Select" id="select"><i class="fa fa-arrows" aria-hidden="true"></i>
+             Select</button></span>
+        <button onclick="Addtext()"><i class="fa fa-font" aria-hidden="true"></i>
+             Add Text</button>
+           
+       
+
+         <span class="mdi mdi-format-text"> <button title="Draw!" id="draw"><i class="fa fa-pencil" aria-hidden="true"></i>
+             Pen</button></span>
+         <span class="mdi mdi-format-text"> <button title="Remove selected" id="remove"><i class="fa fa-trash" aria-hidden="true"></i>
+             Remove</button></span>
+         <span class="mdi mdi-format-text"> <button title="Clear" id="clear"><i class="fa fa-ban" aria-hidden="true"></i> Clear</button></span>
+         <button><label title="Add a background" class="myFile2"><span class="mdi mdi-image"><i class="fa fa-picture-o" aria-hidden="true"></i> Add Background</span>&nbsp;
+            <input type="file" id="file" />
+         </label></button>
+        </div>
+
+    <br><br><br>
+
+    <div id="penControls" >
+        <b>> Pen Settings</b>
+        <div id="text-wrapper" style="margin-top: 10px">
+            <label for="pen-color" style="display:inline-block">Colour:</label>  <input type="color" value="" id="pen-color" size="10">
+            </div>
+    </div>
+
+    <br><br><br>
+    <div id="textControls" >
+        <b>> Text Settings</b>
+        <div id="text-wrapper" style="margin-top: 10px">
+        <div id="text-controls">
+            <label for="text-color" style="display:inline-block">Colour:</label>  <input type="color" value="" id="text-color" size="10">
+     <label for="font-family" style="display:inline-block">Font family:</label>
+     <select id="font-family">
+       <option value="arial">Arial</option>
+       <option value="helvetica" selected>Helvetica</option>
+       <option value="myriad pro">Myriad Pro</option>
+       <option value="delicious">Delicious</option>
+       <option value="verdana">Verdana</option>
+       <option value="georgia">Georgia</option>
+       <option value="courier">Courier</option>
+       <option value="comic sans ms">Comic Sans MS</option>
+       <option value="impact">Impact</option>
+       <option value="monaco">Monaco</option>
+       <option value="optima">Optima</option>
+       <option value="hoefler text">Hoefler Text</option>
+       <option value="plaster">Plaster</option>
+       <option value="engagement">Engagement</option>
+     </select>
+     <br>
+     <label for="text-align" style="display:inline-block">Text align:</label>
+     <select id="text-align">
+       <option value="left">Left</option>
+       <option value="center">Center</option>
+       <option value="right">Right</option>
+       <option value="justify">Justify</option>
+     </select>
+    <!--<div>
+       <label for="text-bg-color">Background color:</label>
+       <input type="color" value="" id="text-bg-color" size="10">
+     </div>
+     <div>
+       <label for="text-lines-bg-color">Background text color:</label>
+       <input type="color" value="" id="text-lines-bg-color" size="10">
+     </div>
+     <div>
+       <label for="text-stroke-color">Stroke color:</label>
+       <input type="color" value="" id="text-stroke-color">
+     </div>
+     <div>
+       <label for="text-stroke-width">Stroke width:</label>
+       <input type="range" value="1" min="1" max="5" id="text-stroke-width">
+     </div>-->
+     <div>
+       <label for="text-font-size">Font size:</label>
+       <input type="range" value="" min="1" max="120" step="1" id="text-font-size">
+     </div>
+     <div>
+       <label for="text-line-height">Line height:</label>
+       <input type="range" value="" min="0" max="10" step="0.1" id="text-line-height">
+     </div>
+   </div>
+   <div id="text-controls-additional">
+     <input type='checkbox' name='fonttype' id="text-cmd-bold">
+       Bold
+   
+     <input type='checkbox' name='fonttype' id="text-cmd-italic">
+       Italic
+    
+     <input type='checkbox' name='fonttype' id="text-cmd-underline" >
+       Underline
+     
+     <input type='checkbox' name='fonttype'  id="text-cmd-linethrough">
+       Linethrough
+    
+     <input type='checkbox' name='fonttype'  id="text-cmd-overline" >
+       Overline
+     
+   </div>
+</div>
+</div>
+<br><br><br>
+<b>> Addons</b>
+<div style="margin-top: 10px">
+           <button id="convert2png">Convert to PNG</button>
+               
+           <button id="json-dataless">toDatalessJSON</button>
+       <button id="json">toJSON</button>
+           </div>
+    </div>
+    <br><br><br>
+    <div>
+
+<p>Supported key combinations:</p>
+<pre>  Move cursor:                    left, right, up, down
+  Select character:               shift + left, shift + right
+  Select text vertically:         shift + up, shift + down
+  Move cursor by word:            alt + left, alt + right
+  Select words:                   shift + alt + left, shift + alt + right
+  Move cursor to line start/end:  cmd + left, cmd + right or home, end
+  Select till start/end of line:  cmd + shift + left, cmd + shift + right or shift + home, shift + end
+  Jump to start/end of text:      cmd + up, cmd + down
+  Select till start/end of text:  cmd + shift + up, cmd + shift + down or shift + pgUp, shift + pgDown
+  Delete character:               backspace
+  Delete word:                    alt + backspace
+  Delete line:                    cmd + backspace
+  Forward delete:                 delete
+  Copy text:                      ctrl/cmd + c
+  Paste text:                     ctrl/cmd + v
+  Cut text:                       ctrl/cmd + x
+  Select entire text:             ctrl/cmd + a
+  Quit editing                    tab or esc
+</pre>
+
+<p>Supported mouse/touch combination</p>
+<pre>  Position cursor:                click/touch
+  Create selection:               click/touch &amp; drag
+  Create selection:               click &amp; shift + click
+  Select word:                    double click
+  Select line:                    triple click
+</pre>
+    </div>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.6.5/fabric.min.js"></script>
+        <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/2.0.0-beta.7/fabric.min.js"></script>
+       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.1.0/fabric.all.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/pdfjs-dist@latest/build/pdf.min.js"></script>-->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>-->
+<script type="text/javascript" src="script.js"></script>
+
+</body>
+</html>
